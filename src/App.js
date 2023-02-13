@@ -1,32 +1,29 @@
-import './App.css';
-import {useState} from 'react'
-import Condicional from "./components/Condicional"
-import OutraLista from './components/OutraLista';
-import SeuNome from './components/SeuNome';
-import Saudacao from './components/Saudacao'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import Home from "./pages/Home"
+import Empresa from "./pages/Empresa"
+import Contato from "./pages/Contato"
+import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
 
 
 function App() {
-
-  //centralizar no componente pai o state
-  const [nome, setNome] = useState()
-
-  const meusItens = ['React', 'Vue', 'Angular']
-
+    
   return (
-    <div className="App">
-      <h1>Renderização Condicional</h1>
-      <Condicional/>
-      <h1>Renderização de Listas</h1>
-      <OutraLista itens={meusItens}/>
-      <OutraLista itens={[]}/>
-      <h1>State Lift</h1>
-      {/*alterar o estado no componente filho*/}
-      <SeuNome setNome={setNome}/>
-      {/* restaurar o dado nome*/}
-      <Saudacao nome={nome}/>
+    //No lugar das divs usar Router(Rotas)
+    <Router>
+      <Navbar/> {/* Componente com os links*/}
 
-    </div>
+      {/* Configurando as rotas - associar componentes aos links */}
+      <Routes>
+        <Route path='/' exact='true' element={<Home/>}></Route> {/* colocar exact para quando tiver "/" não acessar sempre a Home */}
+        <Route path='/empresa' element={<Empresa/>}></Route>
+        <Route path='/contato' element={<Contato/>}></Route>
+      </Routes>
+      <Footer/> {/*Rodapé*/}
+    </Router>
+
+    
+    
   )
 }
 
